@@ -1,0 +1,32 @@
+body {
+  text-align: center;
+  background-color: #e3e3e3;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serifz;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+p {
+  background-color: red;
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  width: 50%;
+  padding: 20px;
+}
+
+.marcas {
+  display: flex;
+  flex-direction: row;
+}
+
+img {
+  width: 240px;
+  height: 300px;
+  padding: 30px;
+  gap: 10px;
+  object-fit: contain;
+}

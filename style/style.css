@@ -1,32 +1,118 @@
-body {
-  text-align: center;
-  background-color: #e3e3e3;
-  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-    "Lucida Sans", Arial, sans-serifz;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-p {
-  background-color: red;
-  color: white;
-  text-align: center;
-  font-weight: bold;
-  width: 50%;
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+body {
+  font-family: "Montserrat", sans-serif;
+  background: linear-gradient(
+    to right,
+    #abbaab,
+    #ffffff
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  line-height: 1.6;
+  color: #333;
   padding: 20px;
 }
 
-.marcas {
-  display: flex;
-  flex-direction: row;
+main {
+  max-width: 600px;
+  margin: 40px auto;
+  background-color: #fff;
+  border: 1px solid #ff9800;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
 }
 
-img {
-  width: 240px;
-  height: 300px;
-  padding: 30px;
-  gap: 10px;
-  object-fit: contain;
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 15px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: justify-between;
+  align-items: center;
+  border-radius: 5px;
+}
+
+li button {
+  padding: 8px 12px;
+  font-size: 14px;
+  border: none;
+  border-radius: 5px;
+  background-color: #ff9800;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+li button:hover {
+  background-color: #e68900;
+}
+
+.titulo {
+  text-align: center;
+  color: #333;
+}
+
+.titulo span {
+  color: #ff9800;
+}
+
+.titulo-formulario {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.formulario {
+  padding: 20px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.input-formulario {
+  width: 100%;
+  padding: 15px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.btn {
+  display: block;
+  width: 100%;
+  padding: 15px;
+  border: none;
+  color: #fff;
+  background-color: #ff9800;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 700;
+  transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #e68900;
+}
+
+.buscar {
+  margin-bottom: 30px;
+}
+
+.stock {
+  max-width: 1200px;
+  margin: 0 auto;
 }

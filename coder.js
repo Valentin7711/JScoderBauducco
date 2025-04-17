@@ -1,91 +1,94 @@
-console.log(
-  "Bienvenido a la concesionaria de autos. Aquí se mostrarán los resultados."
-);
+let autos = []; // Aca van a ir guardados los autos
 
-let autos = [];
+const autosGuardados = localStorage.getItem("autos");
 
-function mostrarMenu() {
-  let opcion = prompt(
-    "---- Concesionaria de Autos ---- \n" +
-      "-- Por favor seleccione una opción: -- \n" +
-      "1. Agregar un auto \n" +
-      "2. Buscar autos \n" +
-      "3. Ver autos disponibles \n" +
-      "4. Salir"
-  );
-
-  switch (opcion) {
-    case "1":
-      agregarAuto();
-      break;
-    case "2":
-      buscarAuto();
-      break;
-    case "3":
-      verAutos();
-      break;
-    case "4":
-      alert("Saliendo de la concesionaria...");
-      return;
-    default:
-      alert("Opción no válida...");
-  }
-
-  setTimeout(mostrarMenu, 100);
+if (autosGuardados) {
+  autos = JSON.parse(autosGuardados);
 }
 
-function agregarAuto() {
-  let marca = prompt("Ingrese la marca del vehículo: ");
-  let modelo = prompt("Ingrese el año del vehículo: ");
-  let precio = parseFloat(prompt("Ingrese el precio del vehículo: "));
+// A buscar elementos del DOM
+const marcaInput = document.querySelector(".marca");
+const modeloInput = document.querySelector(".modelo");
+const precioInput = document.querySelector(".precio");
+const btnAgregar = document.querySelector(".btnAgregar");
+const busquedaInput = document.querySelector(".formulario-buscar");
+const btnBuscar = document.querySelector(".btnBuscar");
+const listaAutos = document.querySelector(".listaAutos");
 
-  if (marca && modelo && !isNaN(precio) && precio > 0) {
-    let auto = { marca, modelo, precio };
-    autos.push(auto);
-    console.log("Auto agregado:", auto);
-  } else {
-    alert("Datos inválidos");
-  }
+// Guardar en localStorage
+function guardarLocalStorage() {
+  localStorage.setItem("autos", JSON.stringify(autos));
 }
 
-function buscarAuto() {
-  if (autos.length === 0) {
-    alert("No hay autos en stock");
+btnAgregar.addEventListener("click", () => {
+  const marca = marcaInput.value.trim();
+  const modelo = modeloInput.value.trim();
+  const precio = parseFloat(precioInput.value);
+
+  if (!marca || !modelo || isNaN(precio)) {
+    alert("Completa todos los campos correctamente");
     return;
   }
 
-  let buscador = prompt("Ingrese el nombre del vehículo que está buscando:");
-  let resultados = autos.filter((auto) =>
-    auto.marca.toLowerCase().includes(buscador.toLowerCase())
+  const auto = { marca, modelo, precio };
+
+  autos.push(auto);
+
+  // Funciones
+  guardarLocalStorage();
+  limpiarFormulario();
+  renderizarAutos();
+});
+
+// Buscar auto
+btnBuscar.addEventListener("click", () => {
+  const terminoBusqueda = busquedaInput.value.trim().toLowerCase();
+  const resultados = autos.filter((auto) =>
+    auto.marca.toLowerCase().includes(terminoBusqueda)
   );
 
-  if (resultados.length > 0) {
-    console.log("Autos encontrados:");
-    resultados.forEach((resultado, index) => {
-      console.log(
-        `${index + 1}. ${resultado.marca} - ${resultado.modelo} - $${
-          resultado.precio
-        }`
-      );
-    });
-    alert("Revisa la consola para ver los resultados");
-  } else {
-    alert("No se encontraron autos con ese criterio");
+  renderizarAutos(resultados);
+});
+
+function renderizarAutos(lista = autos) {
+  listaAutos.innerHTML = "";
+
+  if (lista.length === 0) {
+    listaAutos.innerHTML =
+      "<p style='color: red; text-align: center; font-size: 24px; font-weight: bold; margin-top: 20px;'>No hay autos en stock...</p>";
+    return;
   }
+
+  lista.forEach((auto, index) => {
+    const li = document.createElement("li");
+    li.textContent = `${auto.marca} - ${auto.modelo} - $${auto.precio}`;
+    const btnVender = document.createElement("button");
+    btnVender.textContent = "Vender";
+    btnVender.classList.add("btn");
+
+    btnVender.addEventListener("click", () => venderAutos(index));
+
+    li.appendChild(btnVender);
+
+    listaAutos.appendChild(li);
+  });
 }
 
-function verAutos() {
-  if (autos.length === 0) {
-    alert("No hay autos en stock");
-  } else {
-    console.log("Autos disponibles:");
-    autos.forEach((auto, index) => {
-      console.log(
-        `${index + 1}. ${auto.marca} - ${auto.modelo} - $${auto.precio}`
-      );
-    });
-    alert("Revisa la consola para ver los resultados");
-  }
+function venderAutos(index) {
+  const vendido = autos.splice(index, 1)[0];
+
+  alert(`Auto vendido: ${vendido.marca} - ${vendido.modelo}`);
+
+  renderizarAutos();
 }
 
-mostrarMenu();
+// Limpiar formulario
+function limpiarFormulario() {
+  marcaInput.value = "";
+  modeloInput.value = "";
+  precioInput.value = "";
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  renderizarAutos();
+});

@@ -26,7 +26,12 @@ btnAgregar.addEventListener("click", () => {
   const precio = parseFloat(precioInput.value);
 
   if (!marca || !modelo || isNaN(precio)) {
-    alert("Completa todos los campos correctamente");
+    Swal.fire({
+      icon: "warning",
+      title: "Campos incompletos",
+      text: "Por favor, completá todos los campos correctamente.",
+    });
+
     return;
   }
 
@@ -49,6 +54,17 @@ btnBuscar.addEventListener("click", () => {
 
   renderizarAutos(resultados);
 });
+
+async function cargarAutos() {
+  try {
+    const respuesta = await fetch("/data/stock.json");
+    if (!respuesta.ok) throw new Error("Error al cargar los Autos");
+    const autos = await respuesta.json();
+    renderizarAutos(autos);
+  } catch (error) {
+    console.error(error);
+  }
+}
 
 function renderizarAutos(lista = autos) {
   listaAutos.innerHTML = "";
@@ -77,7 +93,11 @@ function renderizarAutos(lista = autos) {
 function venderAutos(index) {
   const vendido = autos.splice(index, 1)[0];
 
-  alert(`Auto vendido: ${vendido.marca} - ${vendido.modelo}`);
+  Swal.fire({
+    icon: "success",
+    title: "Auto vendido",
+    text: `${vendido.marca} - ${vendido.modelo}`,
+  });
 
   renderizarAutos();
 }
@@ -90,5 +110,6 @@ function limpiarFormulario() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+  cargarAutos();
   renderizarAutos();
 });

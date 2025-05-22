@@ -1,0 +1,27 @@
+[
+  {
+    "marca": "Audi",
+    "modelo": 2020,
+    "precio": 30000
+  },
+  {
+    "marca": "Renault",
+    "modelo": 2017,
+    "precio": 13000
+  },
+  {
+    "marca": "Bmw",
+    "modelo": 2012,
+    "precio": 20000
+  },
+  {
+    "marca": "Ford",
+    "modelo": 2018,
+    "precio": 19000
+  },
+  {
+    "marca": "Jeep",
+    "modelo": 2025,
+    "precio": 60000
+  }
+]

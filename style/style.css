@@ -71,6 +71,15 @@ li button:hover {
   color: #ff9800;
 }
 
+.imgAuto img {
+  height: 100%;
+  width: 100%;
+  gap: 10px;
+  border-radius: 10px;
+  box-shadow: -5px 15px 6px 3px rgba(0, 0, 0, 0.64);
+  object-fit: contain;
+}
+
 .titulo-formulario {
   text-align: center;
   margin-bottom: 20px;

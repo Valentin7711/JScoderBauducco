@@ -59,7 +59,7 @@ async function cargarAutos() {
   try {
     const respuesta = await fetch("/data/stock.json");
     if (!respuesta.ok) throw new Error("Error al cargar los Autos");
-    const autos = await respuesta.json();
+    autos = await respuesta.json();
     renderizarAutos(autos);
   } catch (error) {
     console.error(error);

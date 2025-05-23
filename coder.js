@@ -57,7 +57,7 @@ btnBuscar.addEventListener("click", () => {
 
 async function cargarAutos() {
   try {
-    const respuesta = await fetch("./data/stock.json");
+    const respuesta = await fetch("/JScoderBauducco/data/stock.json");
     if (!respuesta.ok) throw new Error("Error al cargar los Autos");
     autos = await respuesta.json();
     renderizarAutos(autos);
